@@ -1,4 +1,4 @@
-import { productType } from "../types/productType";
+import { IProduct } from "../types/productType";
 import instance from "./config";
 
 export const list = () =>{
@@ -13,11 +13,11 @@ export const remove = (id :any) =>{
     const url = `/product/${id}`;
     return instance.get(url)
 };
-export const create = (product : productType) =>{
+export const create = (product : IProduct) =>{
     const url = "/products";
     return instance.post(url,product)
 };
-export const update = (product : productType) =>{
+export const update = (product : IProduct) =>{
     const url = `/product/${product._id}`;
     return instance.put(url,product)
 };
