@@ -1,6 +1,18 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
+import { IProduct } from '../../types/productType'
+import { useParams } from 'react-router-dom';
+import { read } from '../../api/productApi';
 
 const DetailProduct = () => {
+   const { slug } = useParams();
+   const [product, setProduct] = useState<IProduct>();
+    useEffect(() => {
+        const getProduct = async () => {
+          const { data } = await read(slug);
+          setProduct(data)
+        }
+        getProduct();
+      }, [slug])
     return (
         <div>
             <nav className="flex lg:mt-[40px] mx-[30px] border-[1px] border-gray-300 px-5" aria-label="Breadcrumb">
@@ -31,7 +43,7 @@ const DetailProduct = () => {
                         <img alt="ecommerce" className="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg" />
                         <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                             <h2 className="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2>
-                            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">The Catcher in the Rye</h1>
+                            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1"></h1>
                             <div className="flex mb-4">
                                 <span className="flex items-center">
                                     <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} className="w-4 h-4 text-red-500" viewBox="0 0 24 24">

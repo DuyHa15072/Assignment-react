@@ -57,7 +57,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path='/' element={<LayoutWebsite />}>
-          <Route index element={<HomePage />} />
+          <Route index element={<HomePage products={products}/>} />
           <Route path='/Shops'>
             <Route index element={<ShopPage products={products} />} />
             <Route path=':id' element={<DetailProduct />} />

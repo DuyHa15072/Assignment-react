@@ -9,3 +9,8 @@ type signup = {
     email :string,
     password : string
 }
+export type IUser = {
+    _id? : string,
+    name : string,
+    password: string
+}
