@@ -5,13 +5,13 @@ export const list = () =>{
     const url = "/products";
     return instance.get(url)
 };
-export const read = (id : any) =>{
-    const url = `/product/${id}`;
+export const read = (_id : any) =>{
+    const url = `/product/${_id}`;
     return instance.get(url)
 };
 export const remove = (id :any) =>{
     const url = `/product/${id}`;
-    return instance.get(url)
+    return instance.delete(url)
 };
 export const create = (product : IProduct) =>{
     const url = "/products";

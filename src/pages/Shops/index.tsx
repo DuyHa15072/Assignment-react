@@ -1,5 +1,6 @@
 import { IProduct } from '../../types/productType'
 import React, { useState, useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
 
 
 type ProductListProps = {
@@ -28,45 +29,23 @@ const ShopPage =  (props: ProductListProps) => {
                 </ol>
             </nav>
             <div className='flex justify-center py-16'>
-                <div className='w-[30%]' aria-label="Sidebar">
-                    <div className="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
-                        <div className="">
-                            <label htmlFor="form-search" className="sr-only">Search</label>
-                            <div className="relative mb-[30px]">
-                                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                    <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" /></svg>
-                                </div>
-                                <input type="text" id="form-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none" placeholder="Search name product"/>
-                            </div>
-                        </div>
-                        <ul className="space-y-2">
-                            <h2 className='text-[20px] mb-[20px] font-extrabold'>Categoryes</h2>
-                            <li>
-                                <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    
-                                    <span className="flex-1 ml-3 whitespace-nowrap">Users</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span className="flex-1 ml-3 whitespace-nowrap">Products</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div className="w-full max-w-[11rem]  bg-gray-100 rounded-md hidden lg:flex items-center">
+            <select className="bg-transparent uppercase font-bold text-sm p-4 mr-4" >
+                <option>all categories</option>
+            </select>
+            </div>
                 <div className='w-[68%]'>
                     <div className="bg-white">
                         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                             <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-2 xl:gap-x-8">
                             {props.products.map((item) => {
-                                    return <a href="#" className="group">
+                                    return <NavLink to={`${item._id}`} className="group">
                                     <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
                                         <img src={`${item.img}`}  alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="w-full h-full object-center object-cover group-hover:opacity-75" />
                                     </div>
                                     <h3 className="mt-4 text-sm text-gray-700">{item.name}</h3>
                                     <p className="mt-1 text-lg font-medium text-gray-900">{item.price}</p>
-                                </a>                          
+                                </NavLink>                          
                               })}
                             </div>
 

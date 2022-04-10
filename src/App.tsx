@@ -35,11 +35,13 @@ function App() {
     getProudcts()
   }, [])
 
-  const removeItem = (id: number) => {
+  const removeItem = (id: any) => {
     //call api
     remove(id);
+    console.log(products);
+    
     //rêRender
-    setProducts(products.filter(item => item._id !== id))
+    setProducts(products.filter(item => item._id !== id));
   }
 
   const onHandleAdd = async (product: IProduct) => {
