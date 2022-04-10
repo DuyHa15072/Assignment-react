@@ -16,12 +16,6 @@ const Upload = () =>{
     const [prewiewSource, setPreviewSource] = useState('');
 }
 
-const handleFileInputChange = (e) =>{
-    const file  = e.target.file[0];
-    reader.onloadend = () => {
-         setPreviewSource(reader.result);
-    };
-};
 
 const ProductAdd = (props: ProductAddProps) => {
     const { register, handleSubmit, formState: { errors } } = useForm<TInputs>()
@@ -41,7 +35,7 @@ const ProductAdd = (props: ProductAddProps) => {
                     </div>
                     <div>
                         <label className="sr-only">Ảnh sản phẩm</label>
-                        <input type="text" className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Ảnh sản phẩm (url)" {...register('img')}  id="fileInput"  name="image" onChange={handleFileInputChange}  value={fileInputState} />
+                        <input type="text" className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Ảnh sản phẩm (url)" {...register('img')}  id="fileInput"  name="image" onChange={handleFileInputChange} />
                     </div>
                     <div>
                         <label className="sr-only">Giá sản  </label>
