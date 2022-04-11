@@ -1,91 +1,65 @@
 import { useEffect, useState } from 'react'
-import './index.css'
-import { create, list, remove, update } from './api/productApi'
+import './App.css'
+
 import { Navigate, Route, Routes } from 'react-router-dom'
-import HomePage from './pages/HomePage'
-import LayoutWebsite from './pages/layouts/LayoutWebsite'
-import Signin from './pages/Signin'
-import Signup from './pages/Signup'
-import ShopPage from './pages/Shops'
-import DetailProduct from './pages/Shops/Detail'
-import BlogsPage from './pages/Blogs'
-import DetailBlog from './pages/Blogs/Detail'
-import CartPage from './pages/Checkout/Cart'
-import CheckoutPage from './pages/Checkout/Checkout'
-import LayoutAdmin from './pages/layouts/LayoutAdmin'
-import Dashboard from './pages/Admin/Dashboard'
-import { IProduct } from './types/productType'
-// import ProductsManager from './pages/ProductsManager'
-import ProductAdd from './pages/AddProducts'
-import ProductEdit from './pages/ProductEdit'
-import ProductManager from './pages/ProductsManager'
+import AdminLayount from './Pages/Layout/AdminLayount';
+import ListProduct from './Pages/Admin/Products/ListProduct';
+import WebsiteLayount from './Pages/Layout/WebsiteLayount';
+import HomePage from './Pages/Website/HomePage';
+import News from './Pages/Website/News';
+import Products from './Pages/Website/Products';
+import ProductDetail from './Pages/Website/ProductDetail';
+import AddProduct from './Pages/Admin/Products/AddProduct';
+import Signin from './Pages/Website/Signin';
+import Signup from './Pages/Website/Signup';
+import ListCategory from './Pages/Admin/Category/ListCategory';
+import Dashboard from './Components/Admin/Dashboard';
+import EditProduct from './Pages/Admin/Products/EditProduct';
+import AddCategory from './Pages/Admin/Category/AddCategory';
+import EditCategory from './Pages/Admin/Category/EditCategory';
+import Cart from './Pages/Website/Cart';
+import Bill from './Pages/Website/Bill';
+import Ntfcation from './Pages/Website/Ntfcation';
+import Contact from './Pages/Website/Contact';
+
 
 function App() {
-  // const [products,setProducts] = useState<IProduct>(data)
-  const [products, setProducts] = useState<IProduct[]>([])
-
-  useEffect(() => {
-    const getProudcts = async () => {
-      // const {data} = await list;
-      // const data = await reponse.json();
-      // setProducts(data);
-      const { data } = await list();
-      setProducts(data);
-    }
-    getProudcts()
-  }, [])
-
-  const removeItem = (id: any) => {
-    //call api
-    remove(id);
-    console.log(products);
-    
-    //rêRender
-    setProducts(products.filter(item => item._id !== id));
-  }
-
-  const onHandleAdd = async (product: IProduct) => {
-    const { data } = await create(product);
-    setProducts([...products, data]);
-  }
-
-  const onHnadleUpdate = async (product: IProduct) => {
-    const { data } = await update(product);
-    console.log(data);
-    setProducts(products.map(item => item._id == data._id ? data : item));
-  }
-
   return (
     <div className="App">
+
       <Routes>
-        <Route path='/' element={<LayoutWebsite />}>
-          <Route index element={<HomePage products={products}/>} />
-          <Route path='/Shops'>
-            <Route index element={<ShopPage products={products} />} />
-            <Route path=':id' element={<DetailProduct />} />
-          </Route>
-          <Route path='/Blogs'>
-            <Route index element={<BlogsPage />} />
-            <Route path=':id' element={<DetailBlog />} />
-          </Route>
-          <Route path='/Cart' >
-            <Route index element={<CartPage />} />
-            <Route path='Checkout' element={<CheckoutPage />} />
-          </Route>
+        <Route path='/' element={<WebsiteLayount />}>
+            <Route index element={<HomePage/> }/>
+            <Route path='products' element={<Products />}/>
+            <Route path='news' element={<News/>}/>
+            <Route path='contact' element={<Contact/>}/>
+            <Route path='productdetail/:id' element={<ProductDetail/>}/>
+            <Route path='productdetail/:id/cart' element={<Cart/>}/>
+            <Route path='productdetail/:id/cart/bill' element={<Bill/>}/>
+            <Route path='productdetail/cart/bill/notification' element={<Ntfcation />}/>
         </Route>
-        <Route path="admin" element={<LayoutAdmin />}>
-          {/* <Route index element={<Navigate to="dashboard" />} /> */}
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="products">
-            <Route index element={<ProductManager onRemove={removeItem} products={products} />} />
-            <Route path="add" element={<ProductAdd onAdd={onHandleAdd} />} />
-            <Route path=":id/edit" element={<ProductEdit onUpdate={onHnadleUpdate} />} />
-          </Route>
+        <Route path='admin' element={<AdminLayount />}>
+          <Route index element={<Dashboard />} />
+
+            <Route path='products' >
+              <Route index element={<ListProduct />} /> 
+              <Route path='add' element={<AddProduct />}/>
+              <Route path=':id/edit' element={<EditProduct />} />
+            </Route>
+           <Route path='category'>
+              <Route index element={<ListCategory />} />
+              <Route path='add' element={<AddCategory />}/>
+              <Route path=':id/edit' element={<EditCategory/>} />
+           </Route>
         </Route>
-        <Route path='signin' element={<Signin />} />
-        <Route path='signup' element={<Signup />} />
+        <Route path='signin' element={<Signin/>} />
+        <Route path='signup' element={<Signup/>} />
+        
       </Routes>
-    </div >
+      
+
+
+    </div>
   )
 }
 
