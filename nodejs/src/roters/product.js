@@ -7,9 +7,9 @@ const router = Router();
 
 router.get('/products', list);
 router.get('/products/:id', get);
-router.post('/products', creatProduct);
+router.post('/products',isAuth ,isAdmin , creatProduct);
 router.delete('/products/:id', remove);
 router.put('/products/:id', update);
 
-// router.param("userId", userById)
+router.param("userId", userById)
 export default router;

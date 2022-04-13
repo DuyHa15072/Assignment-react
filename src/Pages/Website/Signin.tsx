@@ -22,28 +22,18 @@ const Signin = () => {
     }
   }
   return (
-    // <form action="" onSubmit={handleSubmit(onSubmit)}>
-    //   <span>Email</span>
-    //   <input type="text" {...register('email', { required: true })} /><hr />
-
-    //   <span>Pass</span>
-    //   <input type="password" {...register('password', { required: true })} /><hr />
-    //   <button>Đăng Nhập</button>
-    // </form>
-    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <img className="mx-auto  w-auto" src="https://yome.vn/logo-cac-hang-giay-noi-tieng/imager_34_36862_700.jpg" alt="Workflow" width="500" height="500"/>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
-
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500"></a>
-            </p>
-        </div>
-        <form className="mt-8 space-y-6" action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
+    <div className="w-full flex flex-wrap">
+        {/* Login Section */}
+        <div className="w-full md:w-1/2 flex flex-col">
+            <div className="flex justify-center md:justify-start pt-12 md:pl-12 md:-mb-24">
+                <a href="#" className=" text-white font-bold text-xl p-4"></a>
+            </div>
+            <div className="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
+                <p className="text-center text-4xl text-[#6F4E37]">Sign in.</p>
+                <form className="mt-8 space-y-6" action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
           <input type="hidden" name="remember" value="true"/>
             <div className="rounded-md shadow-sm -space-y-px">
-              <div>
+              <div className='mb-[10px]'> 
                 <label className="sr-only">Email address</label>
                <input type="email" {...register('email', {required: true})} id="email" placeholder="your@email.com" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
               </div>
@@ -53,29 +43,25 @@ const Signin = () => {
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"/>
-                  <label className="ml-2 block text-sm text-gray-900"> Remember me </label>
-              </div>
-
-              <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </a>
-              </div>
-            </div>
+            
 
             <div>
-              <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#6F4E37] hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                  <svg className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-                  </svg>
                 </span>
                 Sign in
               </button>
             </div>
         </form>
-      </div>
+                <div className="text-center pt-12 pb-12">
+                    <p>Don't have an account? <a href="/signup" className="underline font-semibold text-[#6F4E37]">Register here.</a></p>
+                </div>
+            </div>
+        </div>
+        {/* Image Section */}
+        <div className="w-1/2 shadow-2xl">
+            <img className="object-cover w-full h-screen hidden md:block" src="https://i.pinimg.com/564x/cb/62/0b/cb620bdee2c4a035824dfe4897b3c5aa.jpg" />
+        </div>
     </div>
   )
 }

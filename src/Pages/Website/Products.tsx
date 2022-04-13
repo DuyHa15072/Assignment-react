@@ -1,5 +1,5 @@
 import React,{useEffect, useRef} from 'react'
-import { Link,useParams } from 'react-router-dom'
+import { NavLink,useParams } from 'react-router-dom'
 import {useAppDispatch,useAppSelector} from '../../app/hooks'
 import {listsProduct,namesProduct,filterProName} from '../../features/product/productSlice'
 import {ProductType} from '../../types/products'
@@ -75,209 +75,58 @@ const searchName = (keyword :string) => {
       </div>
 
       <section aria-labelledby="products-heading" className="pt-6 pb-24">
-        <h2 id="products-heading" className="sr-only">Products</h2>
+      <div>
+                    <div className="bg-white">
+                        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                            <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                            {products?.map((item: ProductType ) => {
+                                    return <NavLink to={`/productdetail/${item._id}`} className="group">
+                                    <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+                                        <img src={`${item.img}`}  alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="w-full h-full object-center object-cover group-hover:opacity-75" />
+                                    </div>
+                                    <h3 className="mt-4 text-sm text-gray-700">{item.name}</h3>
+                                    <p className="mt-1 text-lg font-medium text-gray-900">${item.price}</p>
+                                </NavLink>                          
+                              })}
+                            </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8 gap-y-10">
-
-          <form className="hidden lg:block">
-            <h3 className="sr-only">Categories</h3>
-            <ul role="list" className="text-sm font-medium text-gray-900 space-y-4 pb-6 border-b border-gray-200">
-  
-              <li>
-                <a href="/sanpham">All </a>
-              </li>
-              <li><a href="/products/${item.id}/cate"></a></li>
-            </ul>
-
-            <div className="border-b border-gray-200 py-6">
-              <h3 className="-my-3 flow-root">
-                <button type="button" className="py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500" aria-controls="filter-section-0" aria-expanded="false">
-                  <span className="font-medium text-gray-900"> Color </span>
-                  <span className="ml-6 flex items-center">
-
-                    <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                    </svg>
- 
-                    <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clip-rule="evenodd" />
-                    </svg>
-                  </span>
-                </button>
-              </h3>
-              <div className="pt-6" id="filter-section-0">
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <input id="filter-color-0" name="color[]" value="white" type="checkbox" className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"/>
-                    <label className="ml-3 text-sm text-gray-600"> White </label>
-                  </div>
-
-                  <div className="flex items-center">
-                    <input id="filter-color-1" name="color[]" value="beige" type="checkbox" className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"/>
-                    <label  className="ml-3 text-sm text-gray-600"> Beige-colored</label>
-                  </div>
-
-                  <div className="flex items-center">
-                    <input id="filter-color-2" name="color[]" value="blue" type="checkbox" checked className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"/>
-                    <label  className="ml-3 text-sm text-gray-600"> Blue </label>
-                  </div>
-
-                  <div className="flex items-center">
-                    <input id="filter-color-3" name="color[]" value="brown" type="checkbox" className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"/>
-                    <label  className="ml-3 text-sm text-gray-600"> Brown </label>
-                  </div>
-
-                  <div className="flex items-center">
-                    <input id="filter-color-5" name="color[]" value="purple" type="checkbox" className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"/>
-                    <label  className="ml-3 text-sm text-gray-600"> Violet </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="border-b border-gray-200 py-6">
-              <h3 className="-my-3 flow-root">
-                <button type="button" className="py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500" aria-controls="filter-section-2" aria-expanded="false">
-                  <span className="font-medium text-gray-900"> Size</span>
-                  <span className="ml-6 flex items-center">
-
-                    <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                    </svg>
-
-                    <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clip-rule="evenodd" />
-                    </svg>
-                  </span>
-                </button>
-              </h3>
-
-              <div className="pt-6" id="filter-section-2">
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <input id="filter-size-0" name="size[]" value="2l" type="checkbox" className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"/>
-                    <label  className="ml-3 text-sm text-gray-600"> XXl </label>
-                  </div>
-
-                  <div className="flex items-center">
-                    <input id="filter-size-1" name="size[]" value="6l" type="checkbox" className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"/>
-                    <label  className="ml-3 text-sm text-gray-600"> XL </label>
-                  </div>
-
-                  <div className="flex items-center">
-                    <input id="filter-size-2" name="size[]" value="12l" type="checkbox" className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"/>
-                    <label  className="ml-3 text-sm text-gray-600"> L </label>
-                  </div>
-
-                  <div className="flex items-center">
-                    <input id="filter-size-3" name="size[]" value="18l" type="checkbox" className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"/>
-                    <label  className="ml-3 text-sm text-gray-600"> M </label>
-                  </div>
-
-                  <div className="flex items-center">
-                    <input id="filter-size-4" name="size[]" value="20l" type="checkbox" className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"/>
-                    <label  className="ml-3 text-sm text-gray-600"> S </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-
-          <div className="lg:col-span-3">
-            <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 lg:h-full">
-            <div className="bg-white">
-            <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-              <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-               {products?.map((item: ProductType, index) => {
-                    return <div key={index}>
-                  <Link to={`/productdetail/${item._id}`} >
-                <div className="group relative">
-                  <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                    <img src={item.img} alt="Front of men&#039;s Basic Tee in black." className="w-20 h-20  lg:w-full lg:h-full"/>
-                  </div>
-                  <div className="mt-4 flex justify-between">
-                  
-                    <div>
-                      <h3 className="text-sm text-gray-700 no-underline">
-                          <span className='' >{item.name}</span>
-                      </h3>
-                      <p className="mt-1 text-sm text-gray-500">{item.price}</p>
+                        </div>
                     </div>
-                    <p className="text-sm font-medium text-gray-900"></p>
-                  </div>
-                  
+                    <div className="bg-white px-4 py-3 flex items-center justify-between sm:px-6">
+                        <div className="flex-1 flex justify-between sm:hidden">
+                            <a href="#" className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> Previous </a>
+                            <a href="#" className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> Next </a>
+                        </div>
+                        <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between lg:justify-center xl:justify-center">
+                            <div>
+                                <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                    <a href="#" className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                        <span className="sr-only">Previous</span>
+                                        {/* Heroicon name: solid/chevron-left */}
+                                        <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                                        </svg>
+                                    </a>
+                                    {/* Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */}
+                                    <a href="#" aria-current="page" className="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 1 </a>
+                                    <a href="#" className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 2 </a>
+                                    <a href="#" className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"> 3 </a>
+                                    <span className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"> ... </span>
+                                    <a href="#" className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"> 8 </a>
+                                    <a href="#" className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 9 </a>
+                                    <a href="#" className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 10 </a>
+                                    <a href="#" className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                        <span className="sr-only">Next</span>
+                                        {/* Heroicon name: solid/chevron-right */}
+                                        <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                        </svg>
+                                    </a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                </Link>  
-                </div>
-               })}
- 
-              </div>
-              
-            </div>
-            </div>
-            <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-            <div className="flex-1 flex justify-between sm:hidden">
-              <a href="#" className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                Previous
-              </a>
-              <a href="#" className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                Next
-              </a>
-            </div>
-            <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-              <div>
-                <p className="text-sm text-gray-700">
-                  Showing
-                  <span className="font-medium">1</span>
-                  to
-                  <span className="font-medium">10</span>
-                  of
-                  <span className="font-medium">97</span>
-                  results
-                </p>
-              </div>
-              <div>
-                <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                  <a href="#" className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                    <span className="sr-only">Previous</span>
-                    <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                    </svg>
-                  </a>
-                  <a href="#" aria-current="page" className="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
-                    1
-                  </a>
-                  <a href="#" className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
-                    2
-                  </a>
-                  <a href="#" className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium">
-                    3
-                  </a>
-                  <span className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
-                    ...
-                  </span>
-                  <a href="#" className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium">
-                    8
-                  </a>
-                  <a href="#" className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
-                    9
-                  </a>
-                  <a href="#" className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
-                    10
-                  </a>
-                  <a href="#" className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                    <span className="sr-only">Next</span>
-                    <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                    </svg>
-                  </a>
-                </nav>
-              </div>
-            </div>
-            </div>
-            </div>
-          </div>
-        </div>
       </section>
     </main>
   </div>

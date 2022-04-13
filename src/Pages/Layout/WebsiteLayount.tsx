@@ -7,7 +7,7 @@ type Props = {}
 
 const WebsiteLayount = (props: Props) => {
   return (
-    <div>
+    <div >
       <header>
         <Headers/>
       </header>

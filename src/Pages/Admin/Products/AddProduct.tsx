@@ -14,8 +14,8 @@ const AddProduct = () => {
   const navigate = useNavigate();
   const [files, setFiles] = useState<any>([]);
 
-  const CLOUDINARY_PRESET = "k9yoyn7r";
-  const CLOUDINARY_API_URL = "https://api.cloudinary.com/v1_1/dev7lem1d/image/upload";
+  const CLOUDINARY_PRESET = "kt3opnmh";
+  const CLOUDINARY_API_URL = "https://api.cloudinary.com/v1_1/project-js/image/upload";
 
   const onSubmit: SubmitHandler<ProductType> = async (data) => {
       const formData = new FormData();
@@ -52,7 +52,7 @@ useEffect(() => {
   getCategorys();
 }, []);
   return (
-    <div>
+    <div className='mx-[40px] my-[40px]'>
       <div className='flex justify-between mb-[20px]'>
         <h3 className='text-[30px]'>Add Product</h3>
       </div>

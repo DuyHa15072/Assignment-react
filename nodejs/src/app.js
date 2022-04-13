@@ -17,7 +17,7 @@ app.use('/api', categoryRouter);
 app.use('/api', authRouter);
 // connect database
 mongoose
-  .connect('mongodb://127.0.0.1:27017/dbnamw')
+  .connect('mongodb://127.0.0.1:27017/AssReact-js')
   .then(() => console.log('Connect db thanh cong'));
   
 // Connect
