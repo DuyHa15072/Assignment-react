@@ -50,4 +50,15 @@ export const read = async (req, res) => {
     }
 }
 
-
+export const update = async (req, res) => {
+    const condistion = { _id: req.params.id };
+    const { name } = req.body;
+    try {
+        const category = await Category.findOneAndUpdate(condistion, { name })
+        res.status(200).json(category)
+    } catch (error) {
+        res.status(401).json({
+            message: "Lỗi không update được "
+        })
+    }
+}

@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import categoryRouter from './roters/category';
 import authRouter from "./roters/Users";
+import orderRouter from "./roters/order";
 const app = express();
 
 // middleware
@@ -15,9 +16,10 @@ app.use(cors());
 app.use('/api', productRouter);
 app.use('/api', categoryRouter);
 app.use('/api', authRouter);
+app.use('/api', orderRouter);
 // connect database
 mongoose
-  .connect('mongodb://127.0.0.1:27017/AssReact-js')
+  .connect('mongodb://127.0.0.1:27017/dbnamw')
   .then(() => console.log('Connect db thanh cong'));
   
 // Connect

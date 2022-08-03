@@ -1,7 +1,7 @@
 import expressJWT from 'express-jwt';
 
 exports.checkAuth = (req, res, next) => {
-  const isAdmin = true;
+  const role = 1;
   if (isAdmin) {
     next();
   } else {
@@ -28,7 +28,8 @@ export const isAuth = (req, res, next) => {
   next();
 }
 export const isAdmin = (req, res, next) => {
-  if(req.profile.rose==0) {
+  if(req.profile.role==0) {
+    console.log(req.profile);
     return res.status(401).json({
       messager: 'bạn không phải là admin'
     })

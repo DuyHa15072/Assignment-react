@@ -15,8 +15,3 @@ const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export default store
-// function getInt(a: string) {
-//   return parseInt(a);
-// }
-
-// type A = ReturnType<typeof getInt>; // => number

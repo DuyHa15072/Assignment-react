@@ -15,30 +15,57 @@ export const creatProduct = async (req, res) => { // create product
   }
 }
 
-
-export const list = async (req, res) => { // get all
-  // get all
-  const { name } = req.query;
-  if (name) {
-    try {
-      const product = await Product.find({ name: new RegExp(name, 'i') }).exec();
-      res.json(product);
-    } catch (error) {
-      res.status(400).json({
-        message: "không tìm thấy"
-      })
-    }
+export const list = async (req, res) => {
+  let { name, page, _limit } = req.query                                                                             // khai báo và nhận dự liệu gửi lên
+  if (name || (page && _limit)) {
+      if (name) {
+          try {
+              const products = await Product.find({ name: new RegExp(name, 'i') }).exec();
+              res.status(200).json(products)
+          } catch (error) {
+              res.status(401).json({
+                  message: "Lỗi , không lấy được sản phẩm"
+              })
+          }
+      }
+      if (page && _limit) {
+          if (+page < 1) {
+              page = 1
+          }
+          const page_size = +_limit; 
+          const statr = ((+page - 1) * + page_size);
+          try {
+              const products = await Product.find().skip(statr).limit(page_size).exec();
+              res.status(200).json(products)
+          } catch (error) {
+              res.status(401).json({
+                  message: "Lỗi , không lấy được sản phẩm"
+              })
+          }
+      }
   } else {
-    try {
-      const products = await Product.find().exec();
-      res.json(products);
-    } catch (error) {
-      res.status(400).json({
-        message: 'Hiện sản phẩm không thành công',
-      });
-    }
+      try {
+          const products = await Product.find().exec(); //find() tìm ra các sản phẩm trong mảng
+          res.status(200).json(products)
+      } catch (error) {
+          res.status(401).json({
+              message: "Lỗi , không lấy được sản phẩm"
+          })
+      }
   }
+}
 
+
+export const productCate = async (req, res) => {
+  const condistion = { category: req.params.cate };
+  try {
+      const products = await Product.find(condistion).exec();
+      res.status(200).json(products)
+  } catch (error) {
+      res.status(401).json({
+          message: "Lỗi,không thành công !"
+      })
+  }
 };
 export const get = async (req, res) => { // get a product detail
   // get a product
@@ -52,6 +79,9 @@ export const get = async (req, res) => { // get a product detail
     });
   }
 };
+//_limit số lượng phần tử lấy
+//limit số phần tử mình lấy
+
 // export const create = async (req, res) => {
 //   console.log(req.body);
 //   // create product
@@ -67,7 +97,7 @@ export const get = async (req, res) => { // get a product detail
 export const remove = async (req, res) => { // delete product
   // delete product
   try {
-    const products = await Product.findOneAndDelete({
+    const products = await Product.findOneAndDelete({  //Hàm findOneAndDelete () được sử dụng để tìm một phần tử xóa nó
       _id: req.params.id,
     }).exec();
     res.json(products);
@@ -79,9 +109,9 @@ export const remove = async (req, res) => { // delete product
 };
 export const update = async (req, res) => { // update product
   // update product
-  const condition = { _id: req.params.id };
+  const condition = {_id: req.params.id };
   const update = req.body;
-  const optional = { new: true };
+  const optional = { new: true }; 
   try {
     const products = await Product.findOneAndUpdate(
       condition,
@@ -94,4 +124,4 @@ export const update = async (req, res) => { // update product
       message: 'update sản phẩm không thành công',
     });
   }
-};
+}; 

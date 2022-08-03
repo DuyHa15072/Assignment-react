@@ -42,21 +42,20 @@ userSchema.methods = {
     encryptPassword(password){ //b2
         if(!password) return;
         try {
-            onsole.log('password da ma hoa', createHmac('sha256', this.salt).update(password).digest('hex'))
+            // console.log('password da ma hoa', createHmac('sha256', this.salt).update(password).digest('hex'))
             return createHmac('sha256',this.salt).update(password).digest('hex'); // createHmac phương thức trong crypto
         } catch (error) {
             console.log(error);
         }
     },
     authenticate(password){
-        console.log('password in method', password);
-        console.log('this.password == this.encrytPassword(password)', this.password == this.encryptPassword(password))
+        // console.log('password in method', password);
+        // console.log('this.password == this.encrytPassword(password)', this.password == this.encryptPassword(password))
         return this.password == this.encryptPassword(password);
     },
 }
 userSchema.pre("save", async function save(next){ // b1 'save' midthewe của mogo  
     try {
-        console.log('this.password', this.password);
             this.salt = uuidv4();
             this.password = this.encryptPassword(this.password); // truyền mật khẩu lấy đc vào phương thức encryptPassword
             return next();
